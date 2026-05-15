@@ -16,8 +16,9 @@ export function FooterSection() {
             </span>
           </div>
           <p className="mt-4 max-w-xs text-sm leading-relaxed text-zinc-500">
-            A premium startup ecosystem for founders, investors, and builders who
-            move with conviction.
+            Starthub is a startup network where founders showcase their ideas,
+            investors discover opportunities, and builders find the right people to
+            work with.
           </p>
         </div>
         <div className="grid grid-cols-2 gap-10 text-sm sm:grid-cols-3">

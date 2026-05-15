@@ -2,28 +2,31 @@
 
 import { motion } from "framer-motion";
 import { GitBranch, Users2, Zap } from "lucide-react";
+import { useRouter } from "next/navigation";
 
 import { fadeInUp, staggerContainer } from "@/lib/animations";
 
 const lanes = [
   {
-    title: "Chemistry-first intros",
-    body: "Pair founders with operators who have shipped the same class of pain.",
+    title: "Relevant introductions",
+    body: "Meet people who understand your problem, industry, and stage.",
     icon: Users2,
   },
   {
-    title: "Co-founder radar",
-    body: "Vectorized profiles across craft, risk appetite, and time horizon.",
+    title: "Better co-founder matching",
+    body: "Filter people by skills, availability, risk level, and startup goals.",
     icon: Zap,
   },
   {
-    title: "Build in public graphs",
-    body: "Transparent milestones that keep teams accountable to each other.",
+    title: "Progress visibility",
+    body: "Share milestones, updates, and progress so collaborators can trust your execution.",
     icon: GitBranch,
   },
 ];
 
 export function FounderMatchingSection() {
+  const router = useRouter();
+
   return (
     <section id="matching" className="relative scroll-mt-24 py-24 sm:py-32">
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(120deg,transparent,rgba(129,140,248,0.07),transparent)]" />
@@ -46,11 +49,12 @@ export function FounderMatchingSection() {
               variants={fadeInUp}
               className="font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight text-white sm:text-4xl"
             >
-              Co-founders should feel inevitable — not random.
+              Find co-founders who match your skills, goals, and working style.
             </motion.h2>
             <motion.p variants={fadeInUp} className="text-sm leading-relaxed text-zinc-400 sm:text-base">
-              Starthub choreographs intros around craft depth, velocity, and values
-              fit — the kind of alignment that survives the messy middle.
+              Starthub helps founders connect with builders, operators, and
+              co-founders based on skills, commitment level, industry interest,
+              and long-term vision.
             </motion.p>
           </motion.div>
           <div className="space-y-4">
@@ -62,6 +66,11 @@ export function FounderMatchingSection() {
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="group relative overflow-hidden rounded-3xl border border-white/10 bg-gradient-to-r from-white/[0.04] to-transparent p-5 shadow-[0_20px_60px_-40px_rgba(0,0,0,0.9)]"
+                onClick={() => router.push("/signup")}
+                whileHover={{ y: -4 }}
+                tabIndex={0}
+                role="button"
+                style={{ cursor: "pointer" }}
               >
                 <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(circle_at_80%_50%,rgba(167,139,250,0.12),transparent)] opacity-0 transition group-hover:opacity-100" />
                 <div className="flex gap-4">

@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { useRouter } from "next/navigation";
 
@@ -23,19 +24,25 @@ export function CtaSection() {
           variants={fadeInUp}
           className="relative z-10 font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight text-white sm:text-4xl"
         >
-          Claim your coordinates in the Starthub constellation.
+          Ready to build, invest, or find the right people?
         </motion.h2>
         <motion.p
           variants={fadeInUp}
           className="relative z-10 mx-auto mt-4 max-w-xl text-sm text-zinc-300 sm:text-base"
         >
-          Authentication unlocks the full platform — dashboards, deal rooms, and
-          matching fabric ship next.
+          Join Starthub to create your profile, explore startups, meet investors,
+          and connect with potential co-founders.
         </motion.p>
-        <motion.div variants={fadeInUp} className="relative z-10 mt-10 flex justify-center">
-          <MagneticButton type="button" onClick={() => router.push("/signup")}>
-            Create your profile
+        <motion.div variants={fadeInUp} className="relative z-10 mt-10 flex flex-wrap justify-center gap-4">
+          <MagneticButton type="button" onClick={() => router.push("/signup") }>
+            Get Started
           </MagneticButton>
+          <Link
+            href="/login"
+            className="inline-flex items-center rounded-full border border-white/15 bg-white/10 px-5 py-3 text-sm font-medium text-zinc-100 transition hover:border-white/30 hover:bg-white/15 hover:text-white"
+          >
+            Explore the platform
+          </Link>
         </motion.div>
       </motion.div>
     </section>

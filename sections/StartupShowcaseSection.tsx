@@ -2,6 +2,7 @@
 
 import { motion, useMotionTemplate, useMotionValue } from "framer-motion";
 import { Cpu, Orbit, Rocket } from "lucide-react";
+import { useRouter } from "next/navigation";
 import type { ReactNode } from "react";
 
 import { fadeInUp, staggerContainer } from "@/lib/animations";
@@ -9,23 +10,23 @@ import { cn } from "@/utils/cn";
 
 const startups = [
   {
-    name: "Nebula AI",
+    name: "AI Maintenance Platform",
     tag: "Series A",
-    desc: "Adaptive copilots for industrial maintenance.",
+    desc: "Helping factories reduce downtime.",
     icon: Rocket,
     hue: "from-violet-500/30 to-fuchsia-500/20",
   },
   {
-    name: "Lattice Grid",
+    name: "Clean Cloud Startup",
     tag: "Seed",
-    desc: "Carbon-aware compute scheduling at the edge.",
+    desc: "Making cloud computing more energy efficient.",
     icon: Cpu,
     hue: "from-cyan-500/25 to-emerald-500/15",
   },
   {
-    name: "Arcadia Labs",
+    name: "Robotics Collaboration Tool",
     tag: "Pre-seed",
-    desc: "Spatial interfaces for collaborative robotics.",
+    desc: "Helping teams control robots together.",
     icon: Orbit,
     hue: "from-amber-500/25 to-rose-500/15",
   },
@@ -34,9 +35,11 @@ const startups = [
 function TiltCard({
   children,
   className,
+  onClick,
 }: {
   children: ReactNode;
   className?: string;
+  onClick?: () => void;
 }) {
   const mx = useMotionValue(0);
   const my = useMotionValue(0);
@@ -61,6 +64,7 @@ function TiltCard({
 
   return (
     <motion.div
+      onClick={onClick}
       onMouseMove={onMove}
       onMouseLeave={onLeave}
       style={{
@@ -70,7 +74,8 @@ function TiltCard({
       }}
       whileHover={{ scale: 1.015 }}
       className={cn(
-        "relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_30px_80px_-50px_rgba(0,0,0,0.9)] backdrop-blur-xl",
+        "group relative overflow-hidden rounded-3xl border border-white/10 bg-white/[0.03] p-6 shadow-[0_30px_80px_-50px_rgba(0,0,0,0.9)] backdrop-blur-xl",
+        onClick && "cursor-pointer",
         className,
       )}
     >
@@ -81,6 +86,8 @@ function TiltCard({
 }
 
 export function StartupShowcaseSection() {
+  const router = useRouter();
+
   return (
     <section id="showcase" className="relative scroll-mt-24 py-24 sm:py-32">
       <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,transparent,rgba(99,102,241,0.06),transparent)]" />
@@ -96,17 +103,18 @@ export function StartupShowcaseSection() {
             variants={fadeInUp}
             className="text-xs font-semibold uppercase tracking-[0.35em] text-indigo-300/90"
           >
-            Startup showcase
+            Startup profiles
           </motion.p>
           <motion.h2
             variants={fadeInUp}
             className="font-[family-name:var(--font-display)] text-3xl font-semibold tracking-tight text-white sm:text-4xl"
           >
-            Floating decks that feel alive — not like a directory.
+            Showcase your startup in a way investors actually understand.
           </motion.h2>
           <motion.p variants={fadeInUp} className="text-sm leading-relaxed text-zinc-400 sm:text-base">
-            Motion-native cards, depth, and light that follow your cursor. Founders
-            get a stage that matches the ambition of what they are building.
+            Create a clear startup profile with your pitch, traction, market,
+            team, and progress — so people can understand your vision without digging
+            through long pitch decks.
           </motion.p>
         </motion.div>
         <div className="grid gap-6 md:grid-cols-3">
@@ -118,7 +126,7 @@ export function StartupShowcaseSection() {
               viewport={{ once: true, margin: "-40px" }}
               transition={{ delay: i * 0.08, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
             >
-              <TiltCard>
+              <TiltCard onClick={() => router.push("/signup") }>
                 <div
                   className={cn(
                     "mb-4 inline-flex rounded-2xl border border-white/10 bg-gradient-to-br p-3",
@@ -134,6 +142,9 @@ export function StartupShowcaseSection() {
                   </span>
                 </div>
                 <p className="mt-3 text-sm leading-relaxed text-zinc-400">{s.desc}</p>
+                <p className="mt-5 text-sm font-semibold text-indigo-300 transition group-hover:text-white">
+                  Join this story
+                </p>
               </TiltCard>
             </motion.div>
           ))}

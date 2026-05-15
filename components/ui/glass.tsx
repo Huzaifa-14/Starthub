@@ -32,13 +32,15 @@ type MagneticButtonProps = {
   children: ReactNode;
   className?: string;
   type?: "button" | "submit";
-  onClick?: () => void;
+  disabled?: boolean;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 };
 
 export function MagneticButton({
   children,
   className,
   type = "button",
+  disabled,
   onClick,
 }: MagneticButtonProps) {
   const ref = useRef<HTMLButtonElement>(null);
@@ -48,6 +50,7 @@ export function MagneticButton({
   const springY = useSpring(y, { stiffness: 220, damping: 18, mass: 0.4 });
 
   function handleMove(e: React.MouseEvent<HTMLButtonElement>) {
+    if (disabled) return;
     const el = ref.current;
     if (!el) return;
     const r = el.getBoundingClientRect();
@@ -67,13 +70,15 @@ export function MagneticButton({
       ref={ref}
       type={type}
       style={{ x: springX, y: springY }}
+      disabled={disabled}
       onClick={onClick}
       onMouseMove={handleMove}
       onMouseLeave={handleLeave}
-      whileTap={{ scale: 0.98 }}
+      whileTap={disabled ? undefined : { scale: 0.98 }}
       className={cn(
         "relative inline-flex items-center justify-center overflow-hidden rounded-full px-7 py-3 text-sm font-semibold text-zinc-950",
         "bg-gradient-to-r from-white via-zinc-100 to-zinc-200 shadow-[0_0_40px_-10px_rgba(255,255,255,0.45)] transition-shadow hover:shadow-[0_0_60px_-8px_rgba(129,140,248,0.55)]",
+        disabled && "cursor-not-allowed opacity-70 shadow-none",
         className,
       )}
     >

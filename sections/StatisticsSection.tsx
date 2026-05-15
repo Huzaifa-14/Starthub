@@ -30,10 +30,10 @@ function AnimatedNumber({ value, suffix = "" }: { value: number; suffix?: string
 }
 
 const stats = [
-  { label: "Startups orbiting", value: 1840, suffix: "+" },
-  { label: "Investor desks", value: 320, suffix: "" },
-  { label: "Intros orchestrated", value: 9600, suffix: "+" },
-  { label: "Avg. time to first call", value: 36, suffix: "h" },
+  { label: "1,840+ Startups Listed", value: 1840, suffix: "+" },
+  { label: "320 Investors Discovering Startups", value: 320, suffix: "" },
+  { label: "9,600+ Founder & Investor Intros", value: 9600, suffix: "+" },
+  { label: "36h Average Time to First Call", value: 36, suffix: "h" },
 ];
 
 export function StatisticsSection() {

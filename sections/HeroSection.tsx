@@ -35,39 +35,41 @@ export function HeroSection() {
             className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3 py-1 text-xs font-medium text-indigo-200/90 backdrop-blur-md"
           >
             <Sparkles className="h-3.5 w-3.5 text-cyan-300" />
-            The operating system for ambitious startups
+            Where founders, investors, and co-founders find each other faster.
           </motion.div>
           <motion.h1
             variants={fadeInUp}
             className="font-[family-name:var(--font-display)] text-4xl font-semibold leading-[1.05] tracking-tight text-white sm:text-6xl md:text-7xl"
           >
-            A living ecosystem where{" "}
-            <span className="bg-gradient-to-r from-indigo-200 via-white to-cyan-200 bg-clip-text text-transparent">
-              capital meets conviction
-            </span>
-            .
+            Build, discover, and connect inside one startup network.
           </motion.h1>
           <motion.p
             variants={fadeInUp}
             className="max-w-xl text-base leading-relaxed text-zinc-400 sm:text-lg"
           >
-            Starthub unifies discovery, diligence, and chemistry — founders ship
-            narratives, investors surface signal, and co-founders collide with
-            intent.
+            Starthub helps startups showcase their ideas, investors discover serious
+            founders, and builders find the right people to build with — all in one
+            connected platform.
           </motion.p>
           <motion.div
             variants={fadeInUp}
             className="flex flex-wrap items-center gap-4 pt-2"
           >
             <MagneticButton type="button" onClick={() => router.push("/signup")}>
-              Enter the network
+              Join Starthub
               <ArrowUpRight className="ml-2 inline h-4 w-4" />
             </MagneticButton>
             <Link
               href="#showcase"
               className="inline-flex items-center rounded-full border border-white/15 px-5 py-3 text-sm font-medium text-zinc-200 transition hover:border-white/30 hover:text-white"
             >
-              View the orbit
+              Explore how it works
+            </Link>
+            <Link
+              href="/login"
+              className="inline-flex items-center rounded-full border border-transparent bg-white/10 px-5 py-3 text-sm font-medium text-zinc-200 transition hover:border-white/20 hover:bg-white/15 hover:text-white"
+            >
+              Already a member
             </Link>
           </motion.div>
         </motion.div>
