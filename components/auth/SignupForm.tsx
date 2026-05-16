@@ -47,8 +47,7 @@ export function SignupForm() {
         return;
       }
       if (data.session) {
-        router.push("/platform");
-        router.refresh();
+        window.location.href = "/dashboard";
         return;
       }
       setInfo(

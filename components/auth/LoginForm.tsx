@@ -10,7 +10,7 @@ import { GlassCard, GlowInput, MagneticButton } from "@/components/ui/glass";
 export function LoginForm() {
   const router = useRouter();
   const searchParams = useSearchParams();
-  const next = searchParams.get("next") ?? "/platform";
+  const next = searchParams.get("next") ?? "/dashboard";
   const missingEnv = searchParams.get("missing_env");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +23,7 @@ export function LoginForm() {
     setLoading(true);
     try {
       const supabase = createClient();
-      const { error: signError } = await supabase.auth.signInWithPassword({
+      const { data, error: signError } = await supabase.auth.signInWithPassword({
         email,
         password,
       });
@@ -31,8 +31,11 @@ export function LoginForm() {
         setError(signError.message);
         return;
       }
+      if (data?.session) {
+        window.location.href = next;
+        return;
+      }
       router.push(next);
-      router.refresh();
     } catch (err) {
       setError(err instanceof Error ? err.message : "Could not start sign-in.");
     } finally {

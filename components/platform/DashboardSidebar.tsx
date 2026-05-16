@@ -1,8 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { usePathname, useRouter } from "next/navigation";
+import { useState } from "react";
 
 import type { Profile } from "@/lib/database.types";
 import { createClient } from "@/supabase/client";
@@ -22,18 +22,19 @@ export function DashboardSidebar({ profile, userEmail }: DashboardSidebarProps) 
     const supabase = createClient();
     await supabase.auth.signOut();
     router.push("/");
-    router.refresh();
   }
 
   const roleDisplay = profile?.role
     ? profile.role.charAt(0).toUpperCase() + profile.role.slice(1)
     : "User";
 
+  const pathname = usePathname();
+
   return (
     <div className="fixed left-0 top-0 h-full w-56 border-r border-white/10 bg-white/[0.02] backdrop-blur-xl">
       {/* Logo */}
       <div className="border-b border-white/10 px-6 py-6">
-        <p className="text-sm font-semibold text-white">LaunchOS</p>
+        <p className="text-sm font-semibold text-white">Starthub</p>
       </div>
 
       {/* Role Badge */}
@@ -46,17 +47,47 @@ export function DashboardSidebar({ profile, userEmail }: DashboardSidebarProps) 
       {/* Main Navigation */}
       <div className="space-y-1 px-4 py-6">
         <p className="px-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">Main</p>
-        <NavLink href="/platform" icon="📊" label="Dashboard" />
-        <NavLink href="/platform/founders" icon="👥" label="Founders" />
-        <NavLink href="/platform/startups" icon="🚀" label="Startups" />
-        <NavLink href="/platform/investors" icon="💰" label="Investors" />
+        <NavLink
+          href="/dashboard"
+          icon="📊"
+          label="Dashboard"
+          active={pathname === "/dashboard"}
+        />
+        <NavLink
+          href="/founders"
+          icon="👥"
+          label="Founders"
+          active={pathname === "/founders"}
+        />
+        <NavLink
+          href="/startups"
+          icon="🚀"
+          label="Startups"
+          active={pathname === "/startups"}
+        />
+        <NavLink
+          href="/investors"
+          icon="💰"
+          label="Investors"
+          active={pathname === "/investors"}
+        />
       </div>
 
       {/* Account Section */}
       <div className="space-y-1 border-t border-white/10 px-4 py-6">
         <p className="px-3 text-xs font-semibold uppercase tracking-wider text-zinc-500">Account</p>
-        <NavLink href="/platform/profile" icon="👤" label="My Profile" />
-        <NavLink href="/platform/settings" icon="⚙️" label="Settings" />
+        <NavLink
+          href="/profile"
+          icon="👤"
+          label="My Profile"
+          active={pathname === "/profile"}
+        />
+        <NavLink
+          href="/settings"
+          icon="⚙️"
+          label="Settings"
+          active={pathname === "/settings"}
+        />
       </div>
 
       {/* User Footer */}
@@ -90,15 +121,22 @@ function NavLink({
   href,
   icon,
   label,
+  active,
 }: {
   href: string;
   icon: string;
   label: string;
+  active?: boolean;
 }) {
   return (
     <Link
       href={href}
-      className="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-zinc-400 transition-all hover:bg-white/5 hover:text-white"
+      className={
+        "flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm transition-all " +
+        (active
+          ? "bg-indigo-500/10 text-white shadow-[0_0_0_1px_rgba(99,102,241,0.25)]"
+          : "text-zinc-400 hover:bg-white/5 hover:text-white")
+      }
     >
       <span className="text-base">{icon}</span>
       <span>{label}</span>
